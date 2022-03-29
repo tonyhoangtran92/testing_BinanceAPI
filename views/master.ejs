@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="http://localhost:3000" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BINANCE API</title>
+    <link rel="stylesheet" href="./layout.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./socket.io/socket.io.js"></script>
+    <script>
+        var socket = io("http://localhost:3000");
+        socket.on("server-send-price", function (data) {
+            $("h2").html(data);
+        })
+        $(document).ready(function () {
+            $("#btnBuy").click(function () {
+                var amount = parseFloat($("txtAmount").val());
+                $.get("./buy/"+amount, function (data) {
+                    console.log(data);
+                });
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+    <h1 class="text-center">Binance Trading View</h1>
+    <div id="wrapper">
+        <div id="left">
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+                <div id="tradingview_66d67"></div>
+                <div class="tradingview-widget-copyright"><a href="https://vn.tradingview.com/symbols/NASDAQ-AAPL/"
+                        rel="noopener" target="_blank"><span class="blue-text">AAPL Biểu đồ</span> </a> bởi TradingView
+                </div>
+                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                <script type="text/javascript">
+                    new TradingView.widget(
+                        {
+                            "width": 600,
+                            "height": 500,
+                            "symbol": "BINANCE:NEARUSDT",
+                            "interval": "D",
+                            "timezone": "Etc/UTC",
+                            "theme": "light",
+                            "style": "1",
+                            "locale": "vi_VN",
+                            "toolbar_bg": "#f1f3f6",
+                            "enable_publishing": false,
+                            "allow_symbol_change": true,
+                            "container_id": "tradingview_66d67"
+                        }
+                    );
+                </script>
+            </div>
+            <!-- TradingView Widget END -->
+        </div>
+        <div id="right">
+            <h3>NEAR/USDT</h3>
+            <h2></h2>
+            <h1>Created by Tony Tran</h1>
+            <div id="amount">
+                <input type="text" name="" id="txtAmount" placeholder="Amount of CryptoCurrency">
+            </div>
+            <div>
+                <input type="button" value="BUY" id="btnBuy" />
+                <input type="button" value="SELL" id="btnSell" />
+            </div>
+        </div?>
+    </div>
+</body>
+
+</html>

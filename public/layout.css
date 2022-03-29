@@ -1,0 +1,17 @@
+body{background-color: aliceblue;}
+div, h3, h2{
+    text-align: center;
+}
+#left{
+    width: 70%;
+    float: left;
+    min-height: 500px;
+}
+
+#right{
+    width: 30%;
+    float: right;
+    min-height: 500px;
+}
+
+#amount{margin: 20px;}
